@@ -1,4 +1,4 @@
-export function ArtistsShow({ artist, onUpdate }) {
+export function ArtistsShow({ artist, onUpdate, onDestroy }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);
@@ -8,9 +8,9 @@ export function ArtistsShow({ artist, onUpdate }) {
   return (
     <div>
       <h1>Artist Information</h1>
-      <p>{artist.name}</p>
+      {/* <p>{artist.name}</p>
       <p>{artist.genre}</p>
-      <p>{artist.bio}</p>
+      <p>{artist.bio}</p> */}
       <form onSubmit={handleSubmit}>
         <div>
           Name: <input defaultValue={artist.name} name="name" type="text" />
@@ -23,6 +23,7 @@ export function ArtistsShow({ artist, onUpdate }) {
         </div>
         <button type="submit">Update</button>
       </form>
+      <button onClick={() => onDestroy(artist)}>Delete</button>
     </div>
   );
 }

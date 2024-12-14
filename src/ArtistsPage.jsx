@@ -49,6 +49,14 @@ export function ArtistsPage() {
     });
   };
 
+  const handleDestroy = (artist) => {
+    console.log("handleDestroy", artist);
+    axios.delete(`/artists/${artist.id}.json`).then(() => {
+      setArtists(artists.filter((p) => p.id !== artist.id));
+      setIsArtistsShowVisible(false);
+    });
+  };
+
   useEffect(handleIndex, []);
 
   return (
@@ -56,7 +64,7 @@ export function ArtistsPage() {
       <ArtistsNew onCreate={handleCreate} />
       <ArtistsIndex artists={artists} onShow={handleShow} />
       <Modal show={isArtistsShowVisible} onClose={() => setIsArtistsShowVisible(false)}>
-        <ArtistsShow artist={currentArtist} onUpdate={handleUpdate} />
+        <ArtistsShow artist={currentArtist} onUpdate={handleUpdate} onDestroy={handleDestroy} />
       </Modal>
     </main>
   );
