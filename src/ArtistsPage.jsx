@@ -32,6 +32,23 @@ export function ArtistsPage() {
     setCurrentArtist(artist);
   };
 
+  const handleUpdate = (artist, params, successCallback) => {
+    console.log("handleUpdate");
+    axios.patch(`/artists/${artist.id}.json`, params).then((response) => {
+      setArtists(
+        artists.map((p) => {
+          if (p.id === response.data.id) {
+            return response.data;
+          } else {
+            return p;
+          }
+        })
+      );
+      successCallback();
+      setIsArtistsShowVisible(false);
+    });
+  };
+
   useEffect(handleIndex, []);
 
   return (
@@ -39,7 +56,7 @@ export function ArtistsPage() {
       <ArtistsNew onCreate={handleCreate} />
       <ArtistsIndex artists={artists} onShow={handleShow} />
       <Modal show={isArtistsShowVisible} onClose={() => setIsArtistsShowVisible(false)}>
-        <ArtistsShow artist={currentArtist} />
+        <ArtistsShow artist={currentArtist} onUpdate={handleUpdate} />
       </Modal>
     </main>
   );
