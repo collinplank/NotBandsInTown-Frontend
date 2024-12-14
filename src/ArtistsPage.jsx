@@ -2,9 +2,13 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { ArtistsIndex } from "./ArtistsIndex";
 import { ArtistsNew } from "./ArtistsNew";
+import { ArtistsShow } from "./ArtistsShow";
+import { Modal } from "./Modal";
 
 export function ArtistsPage() {
   const [artists, setArtists] = useState([]);
+  const [isArtistsShowVisible, setIsArtistsShowVisible] = useState(false);
+  const [currentArtist, setCurrentArtist] = useState({});
 
   const handleIndex = () => {
     console.log("handleIndex");
@@ -22,12 +26,21 @@ export function ArtistsPage() {
     });
   };
 
+  const handleShow = (artist) => {
+    console.log("handleShow", artist);
+    setIsArtistsShowVisible(true);
+    setCurrentArtist(artist);
+  };
+
   useEffect(handleIndex, []);
 
   return (
     <main>
       <ArtistsNew onCreate={handleCreate} />
-      <ArtistsIndex artists={artists} />
+      <ArtistsIndex artists={artists} onShow={handleShow} />
+      <Modal show={isArtistsShowVisible} onClose={() => setIsArtistsShowVisible(false)}>
+        <ArtistsShow artist={currentArtist} />
+      </Modal>
     </main>
   );
 }
