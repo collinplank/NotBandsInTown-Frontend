@@ -7,18 +7,36 @@ export function ArtistsNew({ onCreate }) {
 
   return (
     <div>
-      <h1>New Artist</h1>
+      <h1>Submit a New Artist</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          Name: <input name="name" type="text" />
-        </div>
-        <div>
-          Genre: <input name="genre" type="text" />
-        </div>
-        <div>
-          Bio: <input name="bio" type="text" />
-        </div>
-        <button type="submit">Create</button>
+        <fieldset>
+          <legend></legend>
+          <div>
+            <label>
+              Name:
+              <br />
+              <input name="name" type="text" />
+            </label>
+          </div>
+          <br />
+          <div>
+            <label>
+              Genre:
+              <br />
+              <input name="genre" type="text" />
+            </label>
+          </div>
+          <br />
+          <div>
+            <label>
+              Bio:
+              <br />
+              <textarea name="bio" rows="5" cols="40"></textarea>
+            </label>
+          </div>
+          <br />
+          <button type="submit">Create</button>
+        </fieldset>
       </form>
     </div>
   );

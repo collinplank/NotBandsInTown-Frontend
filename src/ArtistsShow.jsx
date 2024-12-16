@@ -8,18 +8,18 @@ export function ArtistsShow({ artist, onUpdate, onDestroy }) {
   return (
     <div>
       <h1>Artist Information</h1>
-      {/* <p>{artist.name}</p>
+      <p>{artist.name}</p>
       <p>{artist.genre}</p>
-      <p>{artist.bio}</p> */}
+      <p>{artist.bio}</p>
       <form onSubmit={handleSubmit}>
         <div>
-          Name: <input defaultValue={artist.name} name="name" type="text" />
+          Name: <input name="name" type="text" />
         </div>
         <div>
-          Genre: <input defaultValue={artist.genre} name="genre" type="text" />
+          Genre: <input name="genre" type="text" />
         </div>
         <div>
-          Bio: <input defaultValue={artist.bio} name="bio" type="text" />
+          Bio: <textarea name="bio" rows="5" cols="40"></textarea>
         </div>
         <button type="submit">Update</button>
       </form>
