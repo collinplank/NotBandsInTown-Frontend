@@ -6,36 +6,58 @@ export function ArtistsNew({ onCreate }) {
   };
 
   return (
-    <div>
-      <h1>Submit a New Artist</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Submit a New Artist</h1>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
         <fieldset>
-          <legend></legend>
+          <legend className="sr-only">New Artist Form</legend>
+
           <div>
-            <label>
+            <label className="block text-gray-700 font-medium mb-1" htmlFor="name">
               Name:
-              <br />
-              <input name="name" type="text" />
             </label>
+            <input
+              name="name"
+              type="text"
+              id="name"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter artist name"
+            />
           </div>
-          <br />
+
           <div>
-            <label>
+            <label className="block text-gray-700 font-medium mb-1" htmlFor="genre">
               Genre:
-              <br />
-              <input name="genre" type="text" />
             </label>
+            <input
+              name="genre"
+              type="text"
+              id="genre"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter artist genre"
+            />
           </div>
-          <br />
+
           <div>
-            <label>
+            <label className="block text-gray-700 font-medium mb-1" htmlFor="bio">
               Bio:
-              <br />
-              <textarea name="bio" rows="5" cols="40"></textarea>
             </label>
+            <textarea
+              name="bio"
+              id="bio"
+              rows="5"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Write a short bio about the artist"
+            ></textarea>
           </div>
-          <br />
-          <button type="submit">Create</button>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white font-medium py-2 rounded hover:bg-blue-600 transition-colors"
+          >
+            Create
+          </button>
         </fieldset>
       </form>
     </div>
