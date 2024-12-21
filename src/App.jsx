@@ -3,6 +3,9 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 import { Header } from "./Header";
 import { HomePage } from "./HomePage";
+import { SignupPage } from "./SignupPage";
+import { LoginPage } from "./LoginPage";
+import { LogoutLink } from "./LogoutLink";
 import { ArtistsIndexPage } from "./ArtistsIndexPage";
 import { ArtistsNewPage } from "./ArtistNewPage";
 import { ArtistsShowPage } from "./ArtistsShowPage";
@@ -24,6 +27,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/signup",
+        element: <SignupPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/logout",
+        element: <LogoutLink />,
       },
       {
         path: "/artists",

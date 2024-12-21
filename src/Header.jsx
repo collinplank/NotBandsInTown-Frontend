@@ -13,6 +13,15 @@ export function Header() {
         <Link to="/artists/new" class="hover:text-yellow-400 text-lg font-semibold">
           New Artist
         </Link>
+        <Link to="/signup" className="hover:text-yellow-400 text-lg font-semibold">
+          Signup
+        </Link>
+        <Link to="/login" className="hover:text-yellow-400 text-lg font-semibold">
+          Login
+        </Link>
+        <Link to="/logout" className="hover:text-yellow-400 text-lg font-semibold">
+          Logout
+        </Link>
       </nav>
     </header>
   );
