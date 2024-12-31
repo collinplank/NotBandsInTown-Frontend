@@ -11,7 +11,10 @@ export function Header() {
         </div>
         <div className="hidden md:flex space-x-6">
           <Link to="/artists" className="hover:text-yellow-400 text-lg font-medium">
-            All Artists
+            Artists
+          </Link>
+          <Link to="/concerts" className="hover:text-yellow-400 text-lg font-medium">
+            Concerts
           </Link>
           <Link to="/artists/new" className="hover:text-yellow-400 text-lg font-medium">
             New Artist
