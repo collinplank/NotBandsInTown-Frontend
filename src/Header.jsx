@@ -10,28 +10,46 @@ export function Header() {
           </Link>
         </div>
         <div className="hidden md:flex space-x-8">
-          <Link to="/artists" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
+          <Link
+            to="/artists"
+            className="text-white font-medium text-lg px-4 py-2 rounded-md hover:text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition duration-300"
+          >
             Artists
           </Link>
-          <Link to="/concerts" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
+          <Link
+            to="/concerts"
+            className="text-white font-medium text-lg px-4 py-2 rounded-md hover:text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition duration-300"
+          >
             Concerts
           </Link>
-          <Link to="/setlists" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
+          <Link
+            to="/setlists"
+            className="text-white font-medium text-lg px-4 py-2 rounded-md hover:text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition duration-300"
+          >
             Setlists
           </Link>
-          <Link to="/artists/new" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
+          <Link
+            to="/artists/new"
+            className="text-white font-medium text-lg px-4 py-2 rounded-md hover:text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition duration-300"
+          >
             New Artist
           </Link>
           <Link
             to="/signup"
-            className="bg-yellow-400 text-black font-medium text-lg py-1 px-4 rounded-full hover:bg-yellow-500 transition duration-300"
+            className="bg-yellow-400 text-black font-medium text-lg py-2 px-6 rounded-full shadow-md hover:bg-yellow-500 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition duration-300"
           >
             Signup
           </Link>
-          <Link to="/login" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
+          <Link
+            to="/login"
+            className="text-white font-medium text-lg px-4 py-2 rounded-md hover:text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition duration-300"
+          >
             Login
           </Link>
-          <Link to="/logout" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
+          <Link
+            to="/logout"
+            className="text-whitefont-medium text-lg px-4 py-2 rounded-md hover:text-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition duration-300"
+          >
             Logout
           </Link>
         </div>
