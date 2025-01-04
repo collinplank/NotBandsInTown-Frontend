@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { createContext, useContext, useState as useAuthState } from "react";
+import { createContext, useState as useAuthState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -20,13 +20,8 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={{ isLoggedIn, login, logout }}>{children}</AuthContext.Provider>;
 }
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
 export function SignupPage() {
   const [errors, setErrors] = useState([]);
-  const { login } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +32,6 @@ export function SignupPage() {
       .then((response) => {
         console.log(response.data);
         localStorage.setItem("email", response.data.email);
-        login();
         window.location.href = "/";
       })
       .catch((error) => {
@@ -114,7 +108,7 @@ export function SignupPage() {
 }
 
 export function Header() {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   return (
     <header className="bg-gray-800 text-white p-4">
@@ -144,7 +138,7 @@ export function Header() {
 }
 
 export function LoginPage() {
-  const { login } = useAuth();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = (event) => {
     event.preventDefault();
