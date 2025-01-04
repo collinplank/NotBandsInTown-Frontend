@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { ArtistsIndex } from "./ArtistsIndex";
+import { ArtistsIndex } from "./assets/ARTIST/ArtistsIndex";
 import { ArtistsNew } from "./ArtistsNew";
 import { ArtistsShow } from "./ArtistsShow";
 import { Modal } from "./Modal";

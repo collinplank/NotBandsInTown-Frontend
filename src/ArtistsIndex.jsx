@@ -1,24 +1,32 @@
 export function ArtistsIndex({ artists, onShow }) {
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">All Artists: ({artists.length} total)</h1>
+    <div className="max-w-6xl mx-auto p-4">
+      <h1 className="text-4xl font-extrabold text-gray-800 mb-8 text-center">
+        All Artists: <span className="text-blue-500">({artists.length} total)</span>
+      </h1>
 
-      {artists.map((artist) => (
-        <div key={artist.id} className="bg-white rounded-lg shadow-md p-6 mb-4 hover:shadow-lg transition-shadow">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-2">{artist.name}</h2>
-          <p className="text-gray-600 mb-1">
-            <span className="font-medium"></span> {artist.genre}
-          </p>
-          <p className="text-gray-600 mb-4">{artist.bio}</p>
-
-          <button
-            onClick={() => onShow(artist)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded transition-colors"
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {artists.map((artist) => (
+          <div
+            key={artist.id}
+            className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
           >
-            More Information
-          </button>
-        </div>
-      ))}
+            <div className="bg-blue-500 text-white p-4">
+              <h2 className="text-xl font-semibold">{artist.name}</h2>
+              <p className="text-sm uppercase tracking-wider">{artist.genre}</p>
+            </div>
+            <div className="p-4">
+              <p className="text-gray-700 mb-4">{artist.bio}</p>
+              <button
+                onClick={() => onShow(artist)}
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors duration-300"
+              >
+                More Information
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

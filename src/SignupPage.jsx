@@ -1,8 +1,32 @@
 import axios from "axios";
 import { useState } from "react";
+import { createContext, useContext, useState as useAuthState } from "react";
+import { Link } from "react-router-dom";
+
+const AuthContext = createContext();
+
+export function AuthProvider({ children }) {
+  const [isLoggedIn, setIsLoggedIn] = useAuthState(!!localStorage.getItem("email"));
+
+  const login = () => {
+    setIsLoggedIn(true);
+  };
+
+  const logout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("email");
+  };
+
+  return <AuthContext.Provider value={{ isLoggedIn, login, logout }}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  return useContext(AuthContext);
+}
 
 export function SignupPage() {
   const [errors, setErrors] = useState([]);
+  const { login } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,11 +36,11 @@ export function SignupPage() {
       .post("/users.json", params)
       .then((response) => {
         console.log(response.data);
-        event.target.reset();
-        window.location.href = "/"; // Change this to hide a modal, redirect to a specific page, etc.
+        localStorage.setItem("email", response.data.email);
+        login();
+        window.location.href = "/";
       })
       .catch((error) => {
-        console.log(error.response.data.errors);
         setErrors(error.response.data.errors);
       });
   };
@@ -87,4 +111,52 @@ export function SignupPage() {
       </form>
     </div>
   );
+}
+
+export function Header() {
+  const { isLoggedIn, logout } = useAuth();
+
+  return (
+    <header className="bg-gray-800 text-white p-4">
+      <nav className="container mx-auto flex justify-between">
+        <Link to="/" className="text-lg font-bold">
+          Home
+        </Link>
+        <div>
+          {isLoggedIn ? (
+            <button onClick={logout} className="text-lg font-semibold">
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link to="/signup" className="text-lg font-semibold mr-4">
+                Signup
+              </Link>
+              <Link to="/login" className="text-lg font-semibold">
+                Login
+              </Link>
+            </>
+          )}
+        </div>
+      </nav>
+    </header>
+  );
+}
+
+export function LoginPage() {
+  const { login } = useAuth();
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    axios.post("/login.json", params).then((response) => {
+      if (response.data.logged_in) {
+        localStorage.setItem("email", response.data.email);
+        login();
+        window.location.href = "/";
+      }
+    });
+  };
+
+  return <form onSubmit={handleLogin}>{/* Login form fields */}</form>;
 }
