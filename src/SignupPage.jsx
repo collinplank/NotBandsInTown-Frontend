@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
-import { createContext, useContext, useState as useAuthState } from "react";
+import { createContext, useState as useAuthState } from "react";
+import { useAuth } from "./useAuth";
 import { Link } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -18,10 +19,6 @@ export function AuthProvider({ children }) {
   };
 
   return <AuthContext.Provider value={{ isLoggedIn, login, logout }}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
 }
 
 export function SignupPage() {
