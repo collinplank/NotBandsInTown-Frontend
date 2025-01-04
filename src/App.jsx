@@ -10,6 +10,7 @@ import { ArtistsIndexPage } from "./ArtistsIndexPage";
 import { ArtistsNewPage } from "./ArtistNewPage";
 import { ArtistsShowPage } from "./ArtistsShowPage";
 import { ConcertsPage } from "./ConcertsPage";
+import { SetlistPage } from "./SetlistPage";
 import { Footer } from "./Footer";
 
 axios.defaults.baseURL = "http://localhost:3000";
@@ -60,6 +61,11 @@ const router = createBrowserRouter([
         element: <ConcertsPage />,
         loader: () => axios.get("/concerts.json").then((response) => response.data),
       },
+      {
+        path: "/setlists",
+        element: <SetlistPage />,
+        loader: () => axios.get("/setlists.json").then((response) => response.data),
+      },
     ],
   },
 ]);
@@ -69,13 +75,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-//   return (
-//     <div>
-//       <Header />
-//       <ArtistsPage />
-//       <Footer />
-//     </div>
-//   );
-// }

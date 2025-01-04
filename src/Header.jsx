@@ -2,30 +2,36 @@ import { Link } from "react-router-dom";
 
 export function Header() {
   return (
-    <header className="bg-black text-white shadow-lg">
+    <header className="bg-gradient-to-r from-blue-800 to-purple-600 text-white shadow-lg">
       <nav className="flex justify-between items-center px-6 py-4">
-        <div className="text-2xl font-bold">
-          <Link to="/" className="hover:text-yellow-400">
+        <div className="text-3xl font-extrabold tracking-wide">
+          <Link to="/" className="hover:text-yellow-400 transition duration-300">
             MyMusic
           </Link>
         </div>
-        <div className="hidden md:flex space-x-6">
-          <Link to="/artists" className="hover:text-yellow-400 text-lg font-medium">
+        <div className="hidden md:flex space-x-8">
+          <Link to="/artists" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
             Artists
           </Link>
-          <Link to="/concerts" className="hover:text-yellow-400 text-lg font-medium">
+          <Link to="/concerts" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
             Concerts
           </Link>
-          <Link to="/artists/new" className="hover:text-yellow-400 text-lg font-medium">
+          <Link to="/setlists" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
+            Setlists
+          </Link>
+          <Link to="/artists/new" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
             New Artist
           </Link>
-          <Link to="/signup" className="hover:text-yellow-400 text-lg font-medium">
+          <Link
+            to="/signup"
+            className="bg-yellow-400 text-black font-medium text-lg py-1 px-4 rounded-full hover:bg-yellow-500 transition duration-300"
+          >
             Signup
           </Link>
-          <Link to="/login" className="hover:text-yellow-400 text-lg font-medium">
+          <Link to="/login" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
             Login
           </Link>
-          <Link to="/logout" className="hover:text-yellow-400 text-lg font-medium">
+          <Link to="/logout" className="hover:text-yellow-400 text-lg font-medium transition duration-300">
             Logout
           </Link>
         </div>
