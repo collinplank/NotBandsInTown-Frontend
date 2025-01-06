@@ -1,44 +1,44 @@
-Bandsintown Clone Frontend
+# Bandsintown Clone Frontend
 
-This project is the frontend of a Bandsintown clone. It allows users to search for bands or artists, view their previous touring history, setlists, and other relevant band information. The frontend is built with React and styled with Tailwind CSS.
+This project is the frontend of a Bandsintown clone. It allows users to search for bands or artists, view their previous touring history, setlists, and other relevant band information. The frontend is built with **React** and styled with **Tailwind CSS**.
 
-Features
+---
 
-Search Functionality: Users can search for bands or artists by name.
+## Features
 
-Artist Details: Display detailed information about an artist, including touring history.
+- **Search Functionality**: Users can search for bands or artists by name.
+- **Artist Details**: Display detailed information about an artist, including touring history.
+- **Setlists**: Show setlists from previous concerts.
+- **Upcoming Events**: Highlight upcoming concerts and events.
+- **Responsive Design**: Optimized for various screen sizes using Tailwind CSS.
 
-Setlists: Show setlists from previous concerts.
+---
 
-Upcoming Events: Highlight upcoming concerts and events.
+## Tech Stack
 
-Responsive Design: Optimized for various screen sizes using Tailwind CSS.
+### Frontend
 
-Tech Stack
+- **React**: JavaScript library for building user interfaces.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Axios**: For making API requests.
 
-Frontend
+---
 
-React: JavaScript library for building user interfaces.
+## Getting Started
 
-Tailwind CSS: Utility-first CSS framework for styling.
+### Prerequisites
 
-Axios: For making API requests.
+- Node.js (v16 or above)
+- npm or yarn
 
-Getting Started
+### Installation
 
-Prerequisites
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/bandsintown-frontend.git
+   ```
 
-Node.js (v16 or above)
-
-npm or yarn
-
-Installation
-
-Clone the repository:
-
-git clone https://github.com/your-username/bandsintown-frontend.git
-
-Navigate to the project directory:
+### Navigate to the project directory:
 
 cd bandsintown-frontend
 
@@ -60,11 +60,11 @@ yarn start
 
 Open your browser and go to http://localhost:3000 to view the application.
 
-API Integration
+### API Integration
 
 The frontend communicates with the backend API (built with Ruby on Rails) to fetch data about bands, concerts, and setlists. Ensure the backend is running and accessible before starting the frontend.
 
-Environment Variables
+### Environment Variables
 
 Create a .env file in the root of the project to store the API URL:
 
@@ -72,7 +72,7 @@ REACT_APP_API_URL=http://localhost:3001
 
 Replace http://localhost:3001 with the actual backend URL if it differs.
 
-Project Structure
+### Project Structure
 
 src/
 ├── components/ # Reusable UI components
@@ -82,7 +82,7 @@ src/
 ├── App.js # Main app component
 └── index.js # Entry point
 
-Scripts
+### Scripts
 
 npm start: Start the development server
 
@@ -90,7 +90,7 @@ npm build: Build the project for production
 
 npm test: Run tests (if applicable)
 
-Future Enhancements
+### Future Enhancements
 
 User authentication to save favorite bands and events.
 
@@ -100,16 +100,10 @@ Real-time notifications for new events.
 
 Integration with third-party APIs for ticket purchases.
 
-Contributing
+### Contributing
 
 Contributions are welcome! Feel free to fork this repository, make changes, and submit a pull request.
 
-License
+### License
 
 This project is licensed under the MIT License. See the LICENSE file for more information.
-
-Acknowledgments
-
-Built with inspiration from Bandsintown and Ticketmaster.
-
-Thanks to Actualize for guidance and support.
