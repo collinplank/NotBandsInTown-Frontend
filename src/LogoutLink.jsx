@@ -11,12 +11,14 @@ export function LogoutLink() {
   };
 
   return (
-    <a
-      href="#"
-      className="nav-link text-lg font-semibold text-white hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 p-2 rounded-md transition duration-200 ease-in-out"
-      onClick={handleClick}
-    >
-      Logout
-    </a>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <a
+        href="#"
+        className="w-64 text-center py-4 px-8 text-lg font-semibold text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-lg shadow-lg transition duration-200 ease-in-out cursor-pointer"
+        onClick={handleClick}
+      >
+        Logout
+      </a>
+    </div>
   );
 }

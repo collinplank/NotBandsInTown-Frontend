@@ -6,7 +6,7 @@ export function Header() {
       <nav className="flex justify-between items-center px-6 py-4">
         <div className="text-3xl font-extrabold tracking-wide">
           <Link to="/" className="hover:text-yellow-400 transition duration-300">
-            MyMusic
+            Definitely Not Bandsintown
           </Link>
         </div>
         <div className="hidden md:flex space-x-8">

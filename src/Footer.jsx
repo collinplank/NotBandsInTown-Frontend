@@ -2,7 +2,9 @@ export function Footer() {
   return (
     <footer className="bg-gradient-to-r from-blue-800 to-purple-600 text-white py-8 shadow-inner">
       <div className="container mx-auto text-center">
-        <p className="text-base md:text-lg font-medium tracking-wide">&copy; 2024 MyMusic. All rights reserved.</p>
+        <p className="text-base md:text-lg font-medium tracking-wide">
+          &copy; 2025 Definitely Not Bandsintown. All rights reserved.
+        </p>
         <div className="flex justify-center space-x-8 mt-6">
           <a
             href="https://facebook.com"
