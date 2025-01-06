@@ -33,13 +33,13 @@ The frontend communicates with the backend API (built with Ruby on Rails) to fet
 
 ### Future Enhancements
 
--User authentication to save favorite bands and events.
+- User authentication to save favorite bands and events.
 
--Interactive maps to show concert venues.
+- Interactive maps to show concert venues.
 
--Real-time notifications for new events.
+- Real-time notifications for new events.
 
--Integration with third-party APIs for ticket purchases.
+- Integration with third-party APIs for ticket purchases.
 
 ---
 
