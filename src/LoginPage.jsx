@@ -14,7 +14,7 @@ export function LoginPage() {
         console.log(response.data);
         localStorage.setItem("email", response.data.email);
         event.target.reset();
-        window.location.href = "/"; // Change this to hide a modal, redirect to a specific page, etc.
+        window.location.href = "/";
       })
       .catch((error) => {
         console.log(error.response);

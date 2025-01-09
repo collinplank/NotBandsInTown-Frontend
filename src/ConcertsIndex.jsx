@@ -2,7 +2,7 @@ export function ConcertsIndex({ concerts }) {
   return (
     <div className="bg-gray-50 min-h-screen py-16">
       <div className="container mx-auto px-6">
-        <h1 className="text-5xl font-bold text-gray-900 mb-10 text-center tracking-tight">All Concerts</h1>
+        <h1 className="text-5xl font-bold text-gray-900 mb-10 text-center tracking-tight">Upcoming Concerts</h1>
 
         {concerts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">

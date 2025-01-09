@@ -26,8 +26,6 @@ export function ArtistsShow({ artist, onUpdate, onDestroy }) {
 
   return (
     <div className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-xl space-y-8">
-      <h1 className="text-4xl font-bold text-gray-900">Artist Information</h1>
-
       <div className="bg-gray-50 p-8 rounded-lg shadow-md">
         <h2 className="text-5xl font-extrabold text-gray-900 mb-4">{artist.name}</h2>
         <p className="text-xl text-gray-600 mb-4">{artist.genre}</p>
@@ -35,8 +33,6 @@ export function ArtistsShow({ artist, onUpdate, onDestroy }) {
       </div>
 
       <div className="mt-12">
-        <h3 className="text-4xl font-extrabold text-gray-900 mb-6">Upcoming Concerts</h3>
-
         <div className="bg-gray-50 p-8 rounded-lg shadow-xl">
           <ConcertsIndex concerts={concerts} />
         </div>

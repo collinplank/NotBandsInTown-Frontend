@@ -1,4 +1,12 @@
+import { useState } from "react";
+
 export function HomePage() {
+  const [location, setLocation] = useState("");
+  const [submittedLocation, setSubmittedLocation] = useState("");
+  const handleSubmitLocation = () => {
+    setSubmittedLocation(location);
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-white text-gray-800">
       <div className="flex justify-between items-center px-6 py-4 bg-gray-100 border-b">
@@ -7,15 +15,28 @@ export function HomePage() {
           placeholder="Search events, artists, or venues"
           className="px-6 py-3 w-80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
         />
-        <div>
-          <input
-            type="text"
-            placeholder="Enter your location"
-            className="px-6 py-3 w-80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
-          />
-          <button className="ml-4 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
-            Set Location
-          </button>
+        <div className="flex items-center">
+          {!submittedLocation ? (
+            <>
+              <input
+                type="text"
+                placeholder="Enter your location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="px-6 py-3 w-80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              />
+              <button
+                onClick={handleSubmitLocation}
+                className="ml-4 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+              >
+                Set Location
+              </button>
+            </>
+          ) : (
+            <button className="ml-4 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+              {submittedLocation}
+            </button>
+          )}
         </div>
       </div>
       <div className="flex flex-col items-center justify-center flex-1 px-6 py-12">
@@ -28,7 +49,7 @@ export function HomePage() {
               alt="Fontaines D.C. Concert"
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Fontaines D.C.</h3>
-            <p className="mt-2 text-gray-600 mb-4">April 30, 2025 | Marathon Music Works, Nashville, TN</p>{" "}
+            <p className="mt-2 text-gray-600 mb-4">April 30, 2025 | Marathon Music Works, Nashville, TN</p>
             <a
               href="https://www.ticketweb.com/event/fontaines-dc-usa-tour-2025-marathon-music-works-tickets/13935423?pl=marathonmusicworks&edpPlParam=%3Fpl%3Dmarathonmusicworks"
               target="_blank"
@@ -45,7 +66,7 @@ export function HomePage() {
               alt="Kings of Leon"
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Kings of Leon</h3>
-            <p className="mt-2 text-gray-600 mb-4">September 26, 2024 | Bridgestone Arena, Nashville, TN</p>{" "}
+            <p className="mt-2 text-gray-600 mb-4">September 26, 2024 | Bridgestone Arena, Nashville, TN</p>
             <button className="mt-auto px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
               Buy Tickets
             </button>
@@ -57,7 +78,7 @@ export function HomePage() {
               alt="Arctic Monkeys"
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Arctic Monkeys</h3>
-            <p className="mt-2 text-gray-600 mb-4">September 12, 2023 | Ascend Amphitheater, Nashville, TN</p>{" "}
+            <p className="mt-2 text-gray-600 mb-4">September 12, 2023 | Ascend Amphitheater, Nashville, TN</p>
             <button className="mt-auto px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
               Buy Tickets
             </button>
