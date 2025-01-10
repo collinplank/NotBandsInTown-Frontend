@@ -39,11 +39,15 @@ export function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-white text-gray-800">
       <div className="flex justify-between items-center px-6 py-4 bg-gray-100 border-b">
-        <input
-          type="text"
-          placeholder="Search events, artists, or venues"
-          className="px-6 py-3 w-80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
-        />
+        <form action="/artists">
+          <input
+            name="name"
+            type="text"
+            placeholder="Search events, artists, or venues"
+            className="px-6 py-3 w-80 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-400"
+          />
+        </form>
+
         <div className="flex items-center">
           {!submittedLocation ? (
             <>
