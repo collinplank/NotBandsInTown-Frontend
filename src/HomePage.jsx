@@ -83,37 +83,48 @@ export function HomePage() {
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Fontaines D.C.</h3>
             <p className="mt-2 text-gray-600">April 30, 2025 | Marathon Music Works, Nashville, TN</p>
-            <div className="mt-4 p-4 bg-purple-100 rounded-lg flex flex-col items-center">
+            <div className="mt-4 p-4 bg-purple-100 rounded-lg flex flex-col items-center space-y-2">
               <p className="text-sm text-gray-700 uppercase tracking-wide">Countdown to Show</p>
               <p className="text-2xl font-bold text-purple-700 mt-1">{countdown}</p>
             </div>
-
             <a
               href="https://www.ticketweb.com/event/fontaines-dc-usa-tour-2025-marathon-music-works-tickets/13935423?pl=marathonmusicworks&edpPlParam=%3Fpl%3Dmarathonmusicworks"
-              className="mt-auto px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-center"
+              className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-center"
             >
               Buy Tickets
             </a>
           </div>
+
           <div className="bg-white p-4 rounded-lg shadow-lg overflow-hidden flex flex-col">
             <img
               className="w-full h-56 object-cover rounded-lg"
               src="https://i.scdn.co/image/ab6761610000e5eb6fc940f2e99875ced9bafed0"
+              alt="Kings of Leon Concert"
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Kings of Leon</h3>
             <p className="mt-2 text-gray-600 mb-4">September 26, 2024 | Bridgestone Arena, Nashville, TN</p>
-            <button className="mt-auto px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+            <div className="mt-4 p-4 bg-purple-100 rounded-lg flex flex-col items-center space-y-2">
+              <p className="text-sm text-gray-700 uppercase tracking-wide">Countdown to Show</p>
+              <p className="text-2xl font-bold text-purple-700 mt-1">{countdown}</p>
+            </div>
+            <button className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
               Buy Tickets
             </button>
           </div>
+
           <div className="bg-white p-4 rounded-lg shadow-lg overflow-hidden flex flex-col">
             <img
               className="w-full h-56 object-cover rounded-lg"
               src="https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f"
+              alt="Arctic Monkeys Concert"
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Arctic Monkeys</h3>
             <p className="mt-2 text-gray-600 mb-4">September 12, 2023 | Ascend Amphitheater, Nashville, TN</p>
-            <button className="mt-auto px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+            <div className="mt-4 p-4 bg-purple-100 rounded-lg flex flex-col items-center space-y-2">
+              <p className="text-sm text-gray-700 uppercase tracking-wide">Countdown to Show</p>
+              <p className="text-2xl font-bold text-purple-700 mt-1">{countdown}</p>
+            </div>
+            <button className="mt-4 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
               Buy Tickets
             </button>
           </div>
