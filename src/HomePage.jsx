@@ -90,8 +90,6 @@ export function HomePage() {
 
             <a
               href="https://www.ticketweb.com/event/fontaines-dc-usa-tour-2025-marathon-music-works-tickets/13935423?pl=marathonmusicworks&edpPlParam=%3Fpl%3Dmarathonmusicworks"
-              target="_blank"
-              rel="noopener noreferrer"
               className="mt-auto px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-center"
             >
               Buy Tickets
@@ -101,7 +99,6 @@ export function HomePage() {
             <img
               className="w-full h-56 object-cover rounded-lg"
               src="https://i.scdn.co/image/ab6761610000e5eb6fc940f2e99875ced9bafed0"
-              alt="Kings of Leon"
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Kings of Leon</h3>
             <p className="mt-2 text-gray-600 mb-4">September 26, 2024 | Bridgestone Arena, Nashville, TN</p>
@@ -113,7 +110,6 @@ export function HomePage() {
             <img
               className="w-full h-56 object-cover rounded-lg"
               src="https://i.scdn.co/image/ab6761610000e5eb7da39dea0a72f581535fb11f"
-              alt="Arctic Monkeys"
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Arctic Monkeys</h3>
             <p className="mt-2 text-gray-600 mb-4">September 12, 2023 | Ascend Amphitheater, Nashville, TN</p>
