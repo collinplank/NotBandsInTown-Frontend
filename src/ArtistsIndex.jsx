@@ -14,7 +14,10 @@ export function ArtistsIndex({ artists, onShow }) {
               <img src={artist.image_url} alt={`Image of ${artist.name}`} className="w-full h-64 object-cover" />
             )}
             <div className="p-6 flex flex-col flex-grow">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">{artist.name}</h2>
+              <div className="flex items-center mb-2">
+                <h2 className="text-2xl font-bold text-gray-800 mr-2">{artist.name}</h2>
+                <span className="text-yellow-500 text-1g">★</span>
+              </div>
               <p className="text-sm text-gray-500 mb-4 uppercase tracking-wide">{artist.genre}</p>
               <p className="text-gray-700 mb-6 flex-grow">{artist.bio}</p>
 

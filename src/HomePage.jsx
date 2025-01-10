@@ -1,11 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function HomePage() {
   const [location, setLocation] = useState("");
   const [submittedLocation, setSubmittedLocation] = useState("");
+  const [countdown, setCountdown] = useState("");
+
   const handleSubmitLocation = () => {
     setSubmittedLocation(location);
   };
+
+  useEffect(() => {
+    const concertDate = new Date("2025-04-30T20:00:00");
+
+    const updateCountdown = () => {
+      const now = new Date();
+      const timeDifference = concertDate - now;
+
+      if (timeDifference <= 0) {
+        setCountdown("The show has started!");
+        clearInterval(intervalId);
+        return;
+      }
+
+      const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      setCountdown(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+    };
+
+    const intervalId = setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-gray-800">
@@ -49,7 +78,12 @@ export function HomePage() {
               alt="Fontaines D.C. Concert"
             />
             <h3 className="mt-4 text-xl font-semibold text-gray-800">Fontaines D.C.</h3>
-            <p className="mt-2 text-gray-600 mb-4">April 30, 2025 | Marathon Music Works, Nashville, TN</p>
+            <p className="mt-2 text-gray-600">April 30, 2025 | Marathon Music Works, Nashville, TN</p>
+            <div className="mt-4 p-4 bg-purple-100 rounded-lg flex flex-col items-center">
+              <p className="text-sm text-gray-700 uppercase tracking-wide">Countdown to Show</p>
+              <p className="text-2xl font-bold text-purple-700 mt-1">{countdown}</p>
+            </div>
+
             <a
               href="https://www.ticketweb.com/event/fontaines-dc-usa-tour-2025-marathon-music-works-tickets/13935423?pl=marathonmusicworks&edpPlParam=%3Fpl%3Dmarathonmusicworks"
               target="_blank"
