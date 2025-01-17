@@ -10,9 +10,9 @@ export function ArtistsIndex({ artists, onShow }) {
             key={artist.id}
             className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
           >
-            {artist.image_url && (
+            {artist.image_url ? (
               <img src={artist.image_url} alt={`Image of ${artist.name}`} className="w-full h-64 object-cover" />
-            )}
+            ) : null}
             <div className="p-6 flex flex-col flex-grow">
               <div className="flex items-center mb-2">
                 <h2 className="text-2xl font-bold text-gray-800 mr-2">{artist.name}</h2>
