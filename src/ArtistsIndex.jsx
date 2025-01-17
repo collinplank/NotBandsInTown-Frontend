@@ -19,7 +19,6 @@ export function ArtistsIndex({ artists, onShow }) {
                 <span className="text-yellow-500 text-1g">★</span>
               </div>
               <p className="text-sm text-gray-500 mb-4 uppercase tracking-wide">{artist.genre}</p>
-              <p className="text-gray-700 mb-6 flex-grow">{artist.bio}</p>
 
               <button
                 onClick={() => onShow(artist)}

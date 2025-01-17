@@ -5,7 +5,6 @@ import { ConcertsIndex } from "./ConcertsIndex";
 export function ArtistsShow({ artist }) {
   const [concerts, setConcerts] = useState([]);
   const [bandInfo, setBandInfo] = useState(null);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (artist?.id) {
@@ -20,71 +19,83 @@ export function ArtistsShow({ artist }) {
     }
 
     if (artist?.name) {
-      axios
-        .get(`/artists/search/${artist.name}`)
-        .then((response) => {
-          setBandInfo(response.data);
-          setError("");
-        })
-        .catch((error) => {
-          console.error("Error fetching artist info:", error);
-          setError("Failed to fetch artist info");
-        });
+      axios.get(`/artists/search/${artist.name}`).then((response) => {
+        setBandInfo(response.data);
+      });
     }
   }, [artist]);
 
   return (
-    <div className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-xl space-y-8">
-      <div className="bg-white p-8 rounded-lg shadow-lg space-y-6">
-        <h2 className="text-4xl font-extrabold text-gray-900 mb-6">{artist.name}</h2>
-        {bandInfo && bandInfo.image_url && (
-          <img
-            src={bandInfo.image_url}
-            alt={bandInfo.name}
-            className="w-full max-w-md mx-auto rounded-lg shadow-lg border-4 border-gray-200 mb-6"
-          />
+    <div className="bg-gray-100 min-h-screen">
+      <div className="relative bg-gray-800 text-white h-[400px] md:h-[500px] overflow-hidden">
+        {bandInfo?.image_url && (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${bandInfo.image_url})`,
+            }}
+          ></div>
         )}
-        <p className="text-lg text-gray-700 font-medium mb-4">{artist.genre}</p>
-        <p className="text-base text-gray-600 leading-relaxed mb-6">{artist.bio}</p>
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-transparent to-gray-900 opacity-90"></div>
+        <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight">{artist.name}</h1>
+          <p className="text-lg md:text-xl mt-2">{artist.genre}</p>
+        </div>
       </div>
 
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      {bandInfo ? (
-        <div className="bg-white p-8 rounded-lg shadow-xl space-y-6">
-          <div className="space-y-4">
-            <p className="text-lg text-gray-800">
-              <span className="font-semibold">Upcoming concerts:</span> {bandInfo.upcoming_event_count}
-            </p>
-            <p className="text-lg text-gray-800">
-              <span className="font-semibold">Followers:</span>
-              <span className="text-lg font-bold ml-2">{bandInfo.tracker_count.toLocaleString()}</span>
-            </p>
-          </div>
-          <div className="mt-6">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Follow on social media:</h3>
-            <div className="flex space-x-6">
-              {bandInfo.links.map((link) => (
-                <a
-                  key={link.type}
-                  href={link.url}
-                  className="inline-flex items-center justify-center w-12 h-12 bg-gray-200 text-gray-600 rounded-full hover:bg-yellow-400 hover:text-white transition duration-300"
-                  aria-label={link.type}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className={`fab fa-${link.type} text-2xl`} />
-                </a>
-              ))}
+      <div className="max-w-5xl mx-auto p-8 space-y-8">
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-2xl font-bold mb-4">About the Band</h2>
+          <p className="text-gray-700">{artist.bio}</p>
+        </div>
+
+        {bandInfo && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Band Stats</h3>
+              <p>
+                <strong>Upcoming Concerts:</strong> {bandInfo.upcoming_event_count}
+              </p>
+              <p>
+                <strong>Followers:</strong> {bandInfo.tracker_count.toLocaleString()}
+              </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold mb-4">Follow on Social Media</h3>
+              <div className="flex flex-wrap gap-4">
+                {bandInfo.links.map((link) => {
+                  const platformData = {
+                    facebook: { color: "bg-blue-600 hover:bg-blue-700", icon: "fa-facebook-f" },
+                    twitter: { color: "bg-sky-500 hover:bg-sky-600", icon: "fa-twitter" },
+                    instagram: { color: "bg-pink-500 hover:bg-pink-600", icon: "fa-instagram" },
+                    youtube: { color: "bg-red-500 hover:bg-red-600", icon: "fa-youtube" },
+                    spotify: { color: "bg-green-500 hover:bg-green-600", icon: "fa-spotify" },
+                    default: { color: "bg-gray-500 hover:bg-gray-600", icon: "fa-link" },
+                  };
+
+                  const { color, icon } = platformData[link.type] || platformData.default;
+
+                  return (
+                    <a
+                      key={link.type}
+                      href={link.url}
+                      className={`flex items-center justify-center w-12 h-12 text-white rounded-full shadow-lg transform transition-all duration-300 ${color}`}
+                      aria-label={`Follow on ${link.type}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className={`fab ${icon} text-2xl`} />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <p className="text-gray-600 mt-4 text-center">Loading Bandsintown info...</p>
-      )}
+        )}
 
-      <div className="mt-12">
-        <div className="bg-gray-50 p-8 rounded-lg shadow-xl">
-          <ConcertsIndex concerts={concerts} />
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h3 className="text-2xl font-bold mb-4">Upcoming Concerts</h3>
+          {concerts.length > 0 ? <ConcertsIndex concerts={concerts} /> : <p>No concerts available.</p>}
         </div>
       </div>
     </div>
