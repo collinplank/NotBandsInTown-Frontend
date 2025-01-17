@@ -94,7 +94,6 @@ export function ArtistsShow({ artist }) {
         )}
 
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-2xl font-bold mb-4">Upcoming Concerts</h3>
           {concerts.length > 0 ? <ConcertsIndex concerts={concerts} /> : <p>No concerts available.</p>}
         </div>
       </div>
