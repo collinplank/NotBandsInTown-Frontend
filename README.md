@@ -51,5 +51,3 @@ Welcome to the **Bandsintown Clone Frontend**! This project provides a sleek and
 - **Event Filters**: Enable filtering by date, location, and genre.
 - **User Profiles**: Allow users to customize their experience further.
 - **Push Notifications**: Notify users of updates for their favorite artists or events.
-
----
