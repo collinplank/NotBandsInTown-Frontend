@@ -5,6 +5,7 @@ import { ConcertsIndex } from "./ConcertsIndex";
 export function ArtistsShow({ artist }) {
   const [concerts, setConcerts] = useState([]);
   const [bandInfo, setBandInfo] = useState(null);
+  const [spotifyInfo, setSpotifyInfo] = useState(null);
 
   useEffect(() => {
     if (artist?.id) {
@@ -21,6 +22,10 @@ export function ArtistsShow({ artist }) {
     if (artist?.name) {
       axios.get(`/artists/search/${artist.name}`).then((response) => {
         setBandInfo(response.data);
+      });
+
+      axios.get(`/spotify/${artist.name}`).then((response) => {
+        setSpotifyInfo(response.data);
       });
     }
   }, [artist]);
@@ -90,6 +95,26 @@ export function ArtistsShow({ artist }) {
                 })}
               </div>
             </div>
+          </div>
+        )}
+
+        {spotifyInfo && (
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-4">Spotify Info</h3>
+            <p>
+              <strong>Followers:</strong> {spotifyInfo.followers.toLocaleString()}
+            </p>
+            <p>
+              <strong>Popularity:</strong> {spotifyInfo.popularity}
+            </p>
+            <a
+              href={spotifyInfo.spotify_url}
+              className="inline-block bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-600 transition-all"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Listen on Spotify
+            </a>
           </div>
         )}
 
