@@ -6,29 +6,36 @@ export function ArtistsShow({ artist }) {
   const [concerts, setConcerts] = useState([]);
   const [bandInfo, setBandInfo] = useState(null);
   const [spotifyInfo, setSpotifyInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (artist?.id) {
-      axios
-        .get(`/artists/${artist.id}/concerts.json`)
-        .then((response) => {
-          setConcerts(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching concerts:", error);
-        });
-    }
+    if (!artist?.id || !artist?.name) return;
 
-    if (artist?.name) {
-      axios.get(`/artists/search/${artist.name}`).then((response) => {
-        setBandInfo(response.data);
-      });
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const concertsResponse = await axios.get(`/artists/${artist.id}/concerts.json`);
+        setConcerts(concertsResponse.data);
 
-      axios.get(`/spotify/${artist.name}`).then((response) => {
-        setSpotifyInfo(response.data);
-      });
-    }
+        const bandInfoResponse = await axios.get(`/artists/search/${artist.name}`);
+        setBandInfo(bandInfoResponse.data);
+
+        const spotifyInfoResponse = await axios.get(`/spotify/${artist.name}`);
+        setSpotifyInfo(spotifyInfoResponse.data);
+      } catch (err) {
+        setError("Error fetching data.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [artist]);
+
+  if (loading) return <LoadingSpinner />;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -55,66 +62,10 @@ export function ArtistsShow({ artist }) {
         </div>
 
         {bandInfo && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-4">Band Stats</h3>
-              <p>
-                <strong>Upcoming Concerts:</strong> {bandInfo.upcoming_event_count}
-              </p>
-              <p>
-                <strong>Followers:</strong> {bandInfo.tracker_count.toLocaleString()}
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-4">Follow on Social Media</h3>
-              <div className="flex flex-wrap gap-4">
-                {bandInfo.links.map((link) => {
-                  const platformData = {
-                    facebook: { color: "bg-blue-600 hover:bg-blue-700", icon: "fa-facebook-f" },
-                    twitter: { color: "bg-sky-500 hover:bg-sky-600", icon: "fa-twitter" },
-                    instagram: { color: "bg-pink-500 hover:bg-pink-600", icon: "fa-instagram" },
-                    youtube: { color: "bg-red-500 hover:bg-red-600", icon: "fa-youtube" },
-                    spotify: { color: "bg-green-500 hover:bg-green-600", icon: "fa-spotify" },
-                    default: { color: "bg-gray-500 hover:bg-gray-600", icon: "fa-link" },
-                  };
-
-                  const { color, icon } = platformData[link.type] || platformData.default;
-
-                  return (
-                    <a
-                      key={link.type}
-                      href={link.url}
-                      className={`flex items-center justify-center w-12 h-12 text-white rounded-full shadow-lg transform transition-all duration-300 ${color}`}
-                      aria-label={`Follow on ${link.type}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className={`fab ${icon} text-2xl`} />
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {spotifyInfo && (
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4">Spotify Info</h3>
-            <p>
-              <strong>Followers:</strong> {spotifyInfo.followers.toLocaleString()}
-            </p>
-            <p>
-              <strong>Popularity:</strong> {spotifyInfo.popularity}
-            </p>
-            <a
-              href={spotifyInfo.spotify_url}
-              className="inline-block bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-600 transition-all"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Listen on Spotify
-            </a>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <BandStats bandInfo={bandInfo} />
+            <FollowOnSocialMedia bandInfo={bandInfo} />
+            <SpotifyInfo spotifyInfo={spotifyInfo} />
           </div>
         )}
 
@@ -125,3 +76,80 @@ export function ArtistsShow({ artist }) {
     </div>
   );
 }
+
+const BandStats = ({ bandInfo }) => (
+  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
+    <h3 className="text-2xl font-semibold text-gray-800 text-center mb-6">Band Stats</h3>
+    <p className="text-lg">
+      <strong className="text-gray-600">Upcoming Concerts:</strong>{" "}
+      <span className="text-green-600">{bandInfo.upcoming_event_count}</span>
+    </p>
+    <p className="text-lg">
+      <strong className="text-gray-600">Followers:</strong>{" "}
+      <span className="text-yellow-500">{bandInfo.tracker_count.toLocaleString()}</span>
+    </p>
+  </div>
+);
+
+const FollowOnSocialMedia = ({ bandInfo }) => (
+  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
+    <h3 className="text-2xl font-semibold text-gray-800 text-center mb-6">Follow on Social Media</h3>
+    <div className="flex flex-wrap gap-4 justify-center">
+      {bandInfo.links.map((link) => {
+        const platformData = {
+          facebook: { color: "bg-blue-600 hover:bg-blue-700", icon: "fa-facebook-f" },
+          twitter: { color: "bg-sky-500 hover:bg-sky-600", icon: "fa-twitter" },
+          instagram: { color: "bg-pink-500 hover:bg-pink-600", icon: "fa-instagram" },
+          youtube: { color: "bg-red-500 hover:bg-red-600", icon: "fa-youtube" },
+          spotify: { color: "bg-green-500 hover:bg-green-600", icon: "fa-spotify" },
+          default: { color: "bg-gray-500 hover:bg-gray-600", icon: "fa-link" },
+        };
+
+        const { color, icon } = platformData[link.type] || platformData.default;
+
+        return (
+          <a
+            key={link.type}
+            href={link.url}
+            className={`flex items-center justify-center w-12 h-12 text-white rounded-full shadow-lg transform transition-all duration-300 ${color}`}
+            aria-label={`Follow on ${link.type}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className={`fab ${icon} text-2xl`} />
+          </a>
+        );
+      })}
+    </div>
+  </div>
+);
+
+const SpotifyInfo = ({ spotifyInfo }) => (
+  <div className="bg-white p-6 rounded-lg shadow-md flex flex-col">
+    <h3 className="text-2xl font-semibold text-gray-800 text-center mb-6">Spotify Info</h3>
+    <div className="flex-grow">
+      <p className="text-lg">
+        <strong className="text-gray-600">Followers:</strong>{" "}
+        <span className="text-green-600">{spotifyInfo.followers ? spotifyInfo.followers.toLocaleString() : "N/A"}</span>
+      </p>
+      <p className="text-lg">
+        <strong className="text-gray-600">Popularity:</strong>{" "}
+        <span className="text-yellow-500">{spotifyInfo.popularity || "N/A"}</span>
+      </p>
+    </div>
+    <a
+      href={spotifyInfo.spotify_url}
+      className="inline-block mt-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-green-600 transition-all"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i className="fas fa-headphones mr-2"></i> Listen on Spotify
+    </a>
+  </div>
+);
+
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen bg-gray-900 bg-opacity-50">
+    <div className="w-16 h-16 border-4 border-t-transparent border-blue-500 border-solid rounded-full animate-spin"></div>
+  </div>
+);
