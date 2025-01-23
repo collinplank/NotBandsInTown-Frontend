@@ -1,24 +1,29 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function LogoutLink() {
-  const handleClick = (event) => {
+  const navigate = useNavigate();
+
+  const handleLogout = async (event) => {
     event.preventDefault();
-    axios.delete("/sessions.json").then((response) => {
-      console.log(response);
+
+    try {
+      await axios.delete("/sessions.json");
       localStorage.removeItem("email");
-      window.location.href = "/";
-    });
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <a
-        href="#"
-        className="w-64 text-center py-4 px-8 text-lg font-semibold text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-lg shadow-lg transition duration-200 ease-in-out cursor-pointer"
-        onClick={handleClick}
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <button
+        onClick={handleLogout}
+        className="w-64 text-center py-4 px-8 text-lg font-semibold text-white bg-red-600 hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none rounded-lg shadow-lg transition duration-200 ease-in-out"
       >
         Logout
-      </a>
+      </button>
     </div>
   );
 }
