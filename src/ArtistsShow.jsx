@@ -34,11 +34,11 @@ export function ArtistsShow({ artist }) {
     fetchData();
   }, [artist]);
 
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <LoadingScreen />;
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className={`bg-gray-100 min-h-screen ${loading ? "bg-white" : ""}`}>
       <div className="relative bg-gray-800 text-white h-[400px] md:h-[500px] overflow-hidden">
         {bandInfo?.image_url && (
           <div
@@ -148,8 +148,33 @@ const SpotifyInfo = ({ spotifyInfo }) => (
   </div>
 );
 
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen bg-gray-900 bg-opacity-50">
-    <div className="w-16 h-16 border-4 border-t-transparent border-blue-500 border-solid rounded-full animate-spin"></div>
-  </div>
-);
+const LoadingScreen = () => {
+  const [barHeights, setBarHeights] = useState([30, 40, 50, 60, 70]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBarHeights((prevHeights) => prevHeights.map(() => Math.floor(Math.random() * (80 - 30 + 1)) + 30));
+    }, 400);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="flex space-x-2">
+        {barHeights.map((height, index) => (
+          <div
+            key={index}
+            className="bg-gradient-to-b from-blue-500 to-purple-500 rounded-md"
+            style={{
+              width: "10px",
+              height: `${height}px`,
+              animation: "wave 0.4s ease-in-out infinite",
+              animationDelay: `${index * 0.1}s`,
+            }}
+          ></div>
+        ))}
+      </div>
+    </div>
+  );
+};
