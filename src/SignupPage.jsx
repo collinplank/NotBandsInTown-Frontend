@@ -1,156 +1,132 @@
 import axios from "axios";
 import { useState } from "react";
-import { createContext, useState as useAuthState, useContext } from "react";
-import { Link } from "react-router-dom";
-
-const AuthContext = createContext();
-
-export function AuthProvider({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useAuthState(!!localStorage.getItem("email"));
-
-  const login = () => {
-    setIsLoggedIn(true);
-  };
-
-  const logout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem("email");
-  };
-
-  return <AuthContext.Provider value={{ isLoggedIn, login, logout }}>{children}</AuthContext.Provider>;
-}
+import { useNavigate } from "react-router-dom";
 
 export function SignupPage() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
+
   const [errors, setErrors] = useState([]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors([]);
-    const params = new FormData(event.target);
     axios
-      .post("/users.json", params)
+      .post("/users.json", formData)
       .then((response) => {
-        console.log(response.data);
         localStorage.setItem("email", response.data.email);
-        window.location.href = "/";
+        navigate("/");
       })
       .catch((error) => {
-        setErrors(error.response.data.errors);
+        setErrors(error.response?.data?.errors || []);
       });
   };
 
   return (
-    <div id="signup" className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">Signup</h1>
-      <ul className="text-red-500 text-sm mb-4">
-        {errors.map((error) => (
-          <li key={error}>{error}</li>
-        ))}
-      </ul>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-gray-700 font-medium">
-            Name:
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
-            placeholder="Enter your name"
-          />
+    <div className="bg-gray-50 min-h-screen flex justify-center items-center">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Create Your Account</h1>
+
+        {errors.length > 0 && (
+          <ul className="text-red-500 text-sm mb-4">
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label htmlFor="name" className="block text-gray-600 font-medium text-sm">
+              Full Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="block text-gray-600 font-medium text-sm">
+              Email Address
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter your email address"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-gray-600 font-medium text-sm">
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password_confirmation" className="block text-gray-600 font-medium text-sm">
+              Confirm Password
+            </label>
+            <input
+              id="password_confirmation"
+              name="password_confirmation"
+              type="password"
+              value={formData.password_confirmation}
+              onChange={handleChange}
+              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Confirm your password"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+          >
+            Create Account
+          </button>
+        </form>
+
+        <div className="text-center mt-4">
+          <p className="text-sm text-gray-600">
+            Already have an account?{" "}
+            <a href="/login" className="text-blue-600 hover:underline">
+              Login here
+            </a>
+          </p>
         </div>
-        <div>
-          <label htmlFor="email" className="block text-gray-700 font-medium">
-            Email:
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
-            placeholder="Enter your email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password" className="block text-gray-700 font-medium">
-            Password:
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
-            placeholder="Enter your password"
-          />
-        </div>
-        <div>
-          <label htmlFor="password_confirmation" className="block text-gray-700 font-medium">
-            Password Confirmation:
-          </label>
-          <input
-            id="password_confirmation"
-            name="password_confirmation"
-            type="password"
-            className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
-            placeholder="Confirm your password"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:outline-none"
-        >
-          Signup
-        </button>
-      </form>
+      </div>
     </div>
   );
-}
-
-export function Header() {
-  const { isLoggedIn, logout } = useContext(AuthContext);
-
-  return (
-    <header className="bg-gray-800 text-white p-4">
-      <nav className="container mx-auto flex justify-between">
-        <Link to="/" className="text-lg font-bold">
-          Home
-        </Link>
-        <div>
-          {isLoggedIn ? (
-            <button onClick={logout} className="text-lg font-semibold">
-              Logout
-            </button>
-          ) : (
-            <>
-              <Link to="/signup" className="text-lg font-semibold mr-4">
-                Signup
-              </Link>
-              <Link to="/login" className="text-lg font-semibold">
-                Login
-              </Link>
-            </>
-          )}
-        </div>
-      </nav>
-    </header>
-  );
-}
-
-export function LoginPage() {
-  const { login } = useContext(AuthContext);
-
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const params = new FormData(event.target);
-    axios.post("/login.json", params).then((response) => {
-      if (response.data.logged_in) {
-        localStorage.setItem("email", response.data.email);
-        login();
-        window.location.href = "/";
-      }
-    });
-  };
-
-  return <form onSubmit={handleLogin}>{/* Login form fields */}</form>;
 }
