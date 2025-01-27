@@ -104,10 +104,16 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
           spotify: { color: "bg-green-500 hover:bg-green-600", icon: "fa-spotify" },
           itunes: { color: "bg-gray-800 hover:bg-gray-900", icon: "fa-apple", label: "Apple Music" },
           amazon: {
-            color: "bg-yellow-600 hover:bg-yellow-700",
+            color: "bg-white hover:bg-yellow-700",
             icon: null,
             label: "Amazon Music",
             logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+          },
+          shazam: {
+            color: "bg-white hover:bg-blue-700",
+            icon: null,
+            label: "Shazam",
+            logo: "https://logos-world.net/wp-content/uploads/2023/02/Shazam-Emblem.png",
           },
           default: { color: "bg-gray-500 hover:bg-gray-600", icon: "fa-link" },
         };
@@ -118,13 +124,13 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
           <div key={link.type} className="flex flex-col items-center">
             <a
               href={link.url}
-              className={`flex items-center justify-center w-12 h-12 text-white rounded-full shadow-lg transform transition-all duration-300 ${color}`}
+              className={`flex items-center justify-center w-14 h-14 text-white rounded-full shadow-lg transform transition-all duration-300 ${color}`}
               aria-label={`Follow on ${label || link.type}`}
               target="_blank"
               rel="noopener noreferrer"
             >
               {logo ? (
-                <img src={logo} alt={label || link.type} className="w-6 h-6 object-contain" />
+                <img src={logo} alt={label || link.type} className="w-10 h-10 object-contain" />
               ) : (
                 <i className={`fab ${icon} text-2xl`} />
               )}
