@@ -115,6 +115,12 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
             label: "Shazam",
             logo: "https://logos-world.net/wp-content/uploads/2023/02/Shazam-Emblem.png",
           },
+          website: {
+            color: "bg-white hover:bg-gray-900",
+            icon: "fa-globe",
+            label: "Official Website",
+            logo: "https://e7.pngegg.com/pngimages/639/449/png-clipart-computer-icons-website-icon-text-globe-thumbnail.png",
+          },
           default: { color: "bg-gray-500 hover:bg-gray-600", icon: "fa-link" },
         };
 
@@ -130,7 +136,9 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
               rel="noopener noreferrer"
             >
               {logo ? (
-                <img src={logo} alt={label || link.type} className="w-10 h-10 object-contain" />
+                <div className="flex justify-center items-center">
+                  <img src={logo} alt={label || link.type} className="w-10 h-10 object-contain" />
+                </div>
               ) : (
                 <i className={`fab ${icon} text-2xl`} />
               )}
