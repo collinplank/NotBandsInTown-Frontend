@@ -103,10 +103,16 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
           youtube: { color: "bg-red-500 hover:bg-red-600", icon: "fa-youtube" },
           spotify: { color: "bg-green-500 hover:bg-green-600", icon: "fa-spotify" },
           itunes: { color: "bg-gray-800 hover:bg-gray-900", icon: "fa-apple", label: "Apple Music" },
+          amazon: {
+            color: "bg-yellow-600 hover:bg-yellow-700",
+            icon: null,
+            label: "Amazon Music",
+            logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg",
+          },
           default: { color: "bg-gray-500 hover:bg-gray-600", icon: "fa-link" },
         };
 
-        const { color, icon, label } = platformData[link.type] || platformData.default;
+        const { color, icon, label, logo } = platformData[link.type] || platformData.default;
 
         return (
           <div key={link.type} className="flex flex-col items-center">
@@ -117,7 +123,11 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className={`fab ${icon} text-2xl`} />
+              {logo ? (
+                <img src={logo} alt={label || link.type} className="w-6 h-6 object-contain" />
+              ) : (
+                <i className={`fab ${icon} text-2xl`} />
+              )}
             </a>
             <span className="text-sm text-gray-700 mt-2 capitalize">{label || link.type}</span>
           </div>
