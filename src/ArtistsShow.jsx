@@ -102,22 +102,25 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
           instagram: { color: "bg-pink-500 hover:bg-pink-600", icon: "fa-instagram" },
           youtube: { color: "bg-red-500 hover:bg-red-600", icon: "fa-youtube" },
           spotify: { color: "bg-green-500 hover:bg-green-600", icon: "fa-spotify" },
+          itunes: { color: "bg-gray-800 hover:bg-gray-900", icon: "fa-apple", label: "Apple Music" },
           default: { color: "bg-gray-500 hover:bg-gray-600", icon: "fa-link" },
         };
 
-        const { color, icon } = platformData[link.type] || platformData.default;
+        const { color, icon, label } = platformData[link.type] || platformData.default;
 
         return (
-          <a
-            key={link.type}
-            href={link.url}
-            className={`flex items-center justify-center w-12 h-12 text-white rounded-full shadow-lg transform transition-all duration-300 ${color}`}
-            aria-label={`Follow on ${link.type}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className={`fab ${icon} text-2xl`} />
-          </a>
+          <div key={link.type} className="flex flex-col items-center">
+            <a
+              href={link.url}
+              className={`flex items-center justify-center w-12 h-12 text-white rounded-full shadow-lg transform transition-all duration-300 ${color}`}
+              aria-label={`Follow on ${label || link.type}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className={`fab ${icon} text-2xl`} />
+            </a>
+            <span className="text-sm text-gray-700 mt-2 capitalize">{label || link.type}</span>
+          </div>
         );
       })}
     </div>
