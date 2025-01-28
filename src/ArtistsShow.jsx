@@ -97,12 +97,12 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
     <div className="flex flex-wrap gap-4 justify-center">
       {bandInfo.links.map((link) => {
         const platformData = {
-          facebook: { color: "bg-blue-600 hover:bg-blue-700", icon: "fa-facebook-f" },
-          twitter: { color: "bg-sky-500 hover:bg-sky-600", icon: "fa-twitter" },
-          instagram: { color: "bg-pink-500 hover:bg-pink-600", icon: "fa-instagram" },
-          youtube: { color: "bg-red-500 hover:bg-red-600", icon: "fa-youtube" },
-          spotify: { color: "bg-green-500 hover:bg-green-600", icon: "fa-spotify" },
-          itunes: { color: "bg-gray-800 hover:bg-gray-900", icon: "fa-apple", label: "Apple Music" },
+          facebook: { color: "bg-blue-600 hover:bg-blue-600", icon: "fa-facebook-f" },
+          twitter: { color: "bg-sky-500 hover:bg-sky-500", icon: "fa-twitter" },
+          instagram: { color: "bg-pink-500 hover:bg-pink-500", icon: "fa-instagram" },
+          youtube: { color: "bg-red-500 hover:bg-red-500", icon: "fa-youtube" },
+          spotify: { color: "bg-green-500 hover:bg-green-500", icon: "fa-spotify" },
+          itunes: { color: "bg-gray-800 hover:bg-gray-800", icon: "fa-apple", label: "Apple Music" },
           amazon: {
             color: "bg-white hover:bg-yellow-700",
             icon: null,
@@ -116,12 +116,54 @@ const FollowOnSocialMedia = ({ bandInfo }) => (
             logo: "https://logos-world.net/wp-content/uploads/2023/02/Shazam-Emblem.png",
           },
           website: {
-            color: "bg-white hover:bg-gray-900",
+            color: "bg-white text-gray-900 hover:bg-gray-900 hover:text-white",
             icon: "fa-globe",
             label: "Official Website",
             logo: "https://e7.pngegg.com/pngimages/639/449/png-clipart-computer-icons-website-icon-text-globe-thumbnail.png",
           },
-          default: { color: "bg-gray-500 hover:bg-gray-600", icon: "fa-link" },
+          tiktok: {
+            color: "bg-white text-gray-900 hover:bg-gray-900 hover:text-white",
+            icon: null,
+            label: "TikTok",
+            logo: "https://www.citypng.com/public/uploads/preview/tiktok-circle-round-logo-brand-video-tik-tok-7017516947932520ecgdidi6e.png?v=2025012423",
+          },
+          vevo: {
+            color: "bg-white text-gray-900 hover:bg-gray-900 hover:text-white",
+            icon: null,
+            label: "Vevo",
+            logo: "https://e7.pngegg.com/pngimages/862/837/png-clipart-logo-vevo-advertising-business-music-business-text-trademark.png",
+          },
+          allmusic: {
+            color: "bg-white text-gray-900 hover:bg-gray-900 hover:text-white",
+            icon: null,
+            label: "AllMusic",
+            logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/AllMusic_Logo.svg/936px-AllMusic_Logo.svg.png",
+          },
+          musicbrainz: {
+            color: "bg-white text-gray-900 hover:bg-gray-900 hover:text-white",
+            icon: null,
+            label: "MusicBrainz",
+            logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/MusicBrainz_Logo_%282016%29.svg/1200px-MusicBrainz_Logo_%282016%29.svg.png",
+          },
+          wikipedia: {
+            color: "bg-white text-gray-900 hover:bg-gray-900 hover:text-white",
+            icon: null,
+            label: "Wikipedia",
+            logo: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Wikipedia-logo-v2-en.svg",
+          },
+          soundcloud: {
+            color: "bg-white text-gray-900 hover:bg-gray-900 hover:text-white",
+            icon: null,
+            label: "Soundcloud",
+            logo: "https://image.similarpng.com/file/similarpng/very-thumbnail/2020/07/Popular-social-media-Soundcloud-logo-on-transparent-PNG.png",
+          },
+          linktree: {
+            color: "bg-white text-gray-900 hover:bg-gray-900 hover:text-white",
+            icon: null,
+            label: "Linktree",
+            logo: "https://img.utdstc.com/icon/0d4/e93/0d4e9331c3b8346858e1e5c4f77e9dfd92dccf8c38db0b280dba00076e5d5dc0:200",
+          },
+          default: { color: "bg-gray-500 hover:bg-gray-500", icon: "fa-link" },
         };
 
         const { color, icon, label, logo } = platformData[link.type] || platformData.default;
