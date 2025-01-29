@@ -1,34 +1,36 @@
 import { Link } from "react-router-dom";
 
-const navLinkClasses =
-  "text-gray-200 font-medium text-base hover:text-yellow-500 focus:outline-none transition duration-300";
+const linkBaseClasses =
+  "text-gray-800 font-medium text-lg transition duration-300 ease-in-out transform hover:scale-105";
+const hoverClasses = "hover:text-blue-600 focus:outline-none";
+const buttonClasses =
+  "bg-blue-600 text-white font-semibold text-lg py-3 px-8 rounded-full shadow-lg hover:bg-blue-500 focus:ring-2 focus:ring-blue-400";
+const NavLink = ({ to, children, className, ariaLabel }) => (
+  <Link to={to} className={`${linkBaseClasses} ${hoverClasses} ${className}`} aria-label={ariaLabel}>
+    {children}
+  </Link>
+);
 
 export function Header() {
   return (
-    <header className="bg-gradient-to-r from-blue-900 to-purple-800 text-white shadow-md">
-      <nav className="flex justify-between items-center px-6 py-4 max-w-screen-xl mx-auto">
-        <div className="text-3xl font-semibold tracking-tight">
-          <Link to="/" className="hover:text-yellow-500 transition duration-300" aria-label="Go to homepage">
+    <header className="bg-white text-gray-900 shadow-xl">
+      <nav className="flex justify-between items-center px-10 py-6 max-w-screen-xl mx-auto">
+        <div className="text-4xl font-bold tracking-tight">
+          <Link to="/" className={`${linkBaseClasses} text-gray-900 hover:text-blue-600`} aria-label="Go to homepage">
             Definitely Not Bandsintown
           </Link>
         </div>
-        <div className="hidden md:flex items-center space-x-10">
-          <Link to="/artists" className={navLinkClasses} aria-label="View favorite artists">
+
+        <div className="flex items-center space-x-14">
+          <NavLink to="/artists" ariaLabel="View favorite artists">
             Favorite Artists
-          </Link>
-          <Link
-            to="/signup"
-            className="bg-yellow-500 text-black font-medium text-base py-2 px-6 rounded-lg shadow-md hover:bg-yellow-400 focus:ring-2 focus:ring-yellow-400 focus:outline-none transition duration-300"
-            aria-label="Sign up"
-          >
+          </NavLink>
+          <NavLink to="/signup" className={buttonClasses} ariaLabel="Sign up">
             Signup
-          </Link>
-          <Link to="/login" className={navLinkClasses} aria-label="Login">
+          </NavLink>
+          <NavLink to="/login" ariaLabel="Login">
             Login
-          </Link>
-          <Link to="/logout" className={navLinkClasses} aria-label="Logout">
-            Logout
-          </Link>
+          </NavLink>
         </div>
       </nav>
     </header>
