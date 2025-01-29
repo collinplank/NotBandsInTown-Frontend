@@ -52,9 +52,9 @@ function Countdown({ concertDate }) {
   }, [concertDate]);
 
   return (
-    <div className="mt-4 p-6 bg-white rounded-lg flex flex-col items-center space-y-2 shadow-md">
-      <p className="text-sm text-purple-600 uppercase tracking-wide">Countdown to Show</p>
-      <p className="text-2xl font-semibold text-blue-800">{countdown}</p>
+    <div className="mt-4 p-6 bg-white rounded-lg flex flex-col items-center space-y-2 shadow-lg">
+      <p className="text-sm text-blue-600 uppercase tracking-wide">Countdown to Show</p>
+      <p className="text-2xl font-semibold text-blue-900">{countdown}</p>
     </div>
   );
 }
@@ -69,17 +69,17 @@ function LocationInput({ location, setLocation, onSubmit }) {
             placeholder="Enter your location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="px-6 py-3 w-80 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 ease-in-out"
+            className="px-6 py-3 w-80 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
           />
           <button
             onClick={onSubmit}
-            className="px-6 py-3 bg-purple-500 text-white rounded-xl hover:bg-purple-600 transition duration-200 ease-in-out"
+            className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition duration-300 ease-in-out"
           >
             Set Location
           </button>
         </>
       ) : (
-        <button className="px-6 py-3 bg-purple-500 text-white rounded-xl hover:bg-purple-600 transition duration-200 ease-in-out">
+        <button className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition duration-300 ease-in-out">
           {location}
         </button>
       )}
@@ -95,14 +95,14 @@ export function HomePage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white text-gray-900">
-      <header className="flex justify-between items-center px-8 py-6 bg-white shadow-md">
+    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
+      <header className="flex justify-between items-center px-10 py-6 bg-white shadow-xl">
         <form action="/artists">
           <input
             name="name"
             type="text"
             placeholder="Search events, artists, or venues"
-            className="px-6 py-3 w-80 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200 ease-in-out"
+            className="px-6 py-3 w-80 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
           />
         </form>
 
@@ -115,21 +115,21 @@ export function HomePage() {
           {concerts.map((concert) => (
             <div
               key={concert.name}
-              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out"
+              className="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 ease-in-out"
             >
               <img
                 className="w-full h-56 object-cover rounded-lg"
                 src={concert.imgSrc}
                 alt={`${concert.name} Concert`}
               />
-              <h3 className="mt-4 text-2xl font-semibold text-blue-900">{concert.name}</h3>
+              <h3 className="mt-4 text-2xl font-semibold text-gray-900">{concert.name}</h3>
               <p className="mt-2 text-gray-600">
                 {concert.date} | {concert.venue}
               </p>
               <Countdown concertDate={concert.date} />
               <a
                 href={concert.ticketLink}
-                className="mt-4 block text-center px-6 py-3 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-200 ease-in-out"
+                className="mt-4 block text-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition duration-300 ease-in-out"
               >
                 Buy Tickets
               </a>
