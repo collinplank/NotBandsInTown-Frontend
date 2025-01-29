@@ -1,11 +1,11 @@
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-r from-blue-900 to-purple-800 text-white py-6 mt-auto">
-      <div className="max-w-screen-xl mx-auto px-6 text-center">
-        <p className="text-sm md:text-base font-medium tracking-tight text-gray-200">
+    <footer className="bg-white text-gray-900 shadow-xl">
+      <nav className="flex justify-center items-center px-10 py-6 max-w-screen-xl mx-auto">
+        <div className="text-sm md:text-base font-medium tracking-tight text-gray-800 text-center">
           &copy; 2025 Definitely Not Bandsintown. All rights reserved.
-        </p>
-      </div>
+        </div>
+      </nav>
     </footer>
   );
 }
