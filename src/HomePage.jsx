@@ -51,85 +51,33 @@ function Countdown({ concertDate }) {
     return () => clearInterval(intervalId);
   }, [concertDate]);
 
-  return (
-    <div className="mt-4 p-6 bg-white rounded-lg flex flex-col items-center space-y-2 shadow-lg">
-      <p className="text-sm text-blue-600 uppercase tracking-wide">Countdown to Show</p>
-      <p className="text-2xl font-semibold text-blue-900">{countdown}</p>
-    </div>
-  );
-}
-
-function LocationInput({ location, setLocation, onSubmit }) {
-  return (
-    <div className="flex items-center space-x-4">
-      {!location ? (
-        <>
-          <input
-            type="text"
-            placeholder="Enter your location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="px-6 py-3 w-80 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
-          />
-          <button
-            onClick={onSubmit}
-            className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition duration-300 ease-in-out"
-          >
-            Set Location
-          </button>
-        </>
-      ) : (
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition duration-300 ease-in-out">
-          {location}
-        </button>
-      )}
-    </div>
-  );
+  return <div className="text-lg font-semibold text-gray-700">{countdown}</div>;
 }
 
 export function HomePage() {
-  const [location, setLocation] = useState("");
-
-  const handleSubmitLocation = () => {
-    setLocation(location);
-  };
-
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-900">
-      <header className="flex justify-between items-center px-10 py-6 bg-white shadow-xl">
-        <form action="/artists">
-          <input
-            name="name"
-            type="text"
-            placeholder="Search events, artists, or venues"
-            className="px-6 py-3 w-80 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
-          />
-        </form>
-
-        <LocationInput location={location} setLocation={setLocation} onSubmit={handleSubmitLocation} />
-      </header>
-
-      <main className="flex flex-col items-center justify-center flex-1 px-8 py-12">
-        <h1 className="text-5xl font-extrabold text-blue-800 mb-8">Find Your Next Concert</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl mx-auto">
+    <div className="min-h-screen bg-white text-gray-900">
+      <main className="p-10 max-w-7xl mx-auto">
+        <h2 className="text-4xl font-bold mb-8 tracking-tight">Upcoming Concerts</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {concerts.map((concert) => (
             <div
               key={concert.name}
-              className="bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition duration-300 ease-in-out"
+              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-2 border border-gray-200"
             >
               <img
-                className="w-full h-56 object-cover rounded-lg"
+                className="w-full h-64 object-cover rounded-lg"
                 src={concert.imgSrc}
                 alt={`${concert.name} Concert`}
               />
-              <h3 className="mt-4 text-2xl font-semibold text-gray-900">{concert.name}</h3>
-              <p className="mt-2 text-gray-600">
+              <h3 className="mt-4 text-2xl font-bold text-gray-900">{concert.name}</h3>
+              <p className="text-gray-600">
                 {concert.date} | {concert.venue}
               </p>
               <Countdown concertDate={concert.date} />
               <a
                 href={concert.ticketLink}
-                className="mt-4 block text-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition duration-300 ease-in-out"
+                className="mt-4 block text-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-500 transition duration-300"
               >
                 Buy Tickets
               </a>
